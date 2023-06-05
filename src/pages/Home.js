@@ -25,10 +25,11 @@ export default function Home() {
         </div>
         <div className='grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3 my-10 lg:my-20'>
             {countries.map((country) => (
-                <article>
-                    <img src={country.flags.png} alt={country.name.common} />
-                    <h3>{country.name.common}</h3>
-                    <p>Capital: {country.capital}</p>
+                <article className='bg-slate-500 p-4 rounded hover:bg-slate-600 transition-all duration-200'>
+                    <img src={country.flags.png} alt={country.name.common} className='rounded  w-full object-cover' />
+                    <h3 className='text-blue-900 font-bold text-lg'>{country.name.common}</h3>
+                    <p className='font-bold'>Capital: {country.capital}</p>
+                    <p className='font-bold'>Population: {country.population}</p>
                 </article>
             ))}
         </div>
