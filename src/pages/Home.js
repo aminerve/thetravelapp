@@ -28,6 +28,7 @@ export default function Home() {
                 <article>
                     <img src={country.flags.png} alt={country.name.common} />
                     <h3>{country.name.common}</h3>
+                    <p>Capital: {country.capital}</p>
                 </article>
             ))}
         </div>
