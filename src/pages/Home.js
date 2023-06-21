@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 export default function Home() {
     const [countries, setCountries] = useState([])
+    const [text, setText] = useState('')
   useEffect(() => {
     const fetchCountryData = async() => {
         try {
@@ -16,6 +17,13 @@ export default function Home() {
     }
     fetchCountryData()
   }, [])
+  const searchForCountry = async() => {
+    try {
+        
+    } catch (error) {
+        
+    }
+  }
     return (
     <>{!countries ? (<h1>Loading...</h1>) : (<>
     <section className='p-8 max-w-7xl mx-auto'>
@@ -23,6 +31,9 @@ export default function Home() {
             <h1 className='flex items-center justify-center text-slate-700 text-center px-5 text-3xl font-bold'>The Travel App</h1>
             <p>Powered by <a href='https://restcountries.com/' target='_blank' rel="noopener noreferrer" className='text-indigo-600 active:text-orange-400'>REST Countries</a></p>
         </div>
+        <form>
+            <input type='text' placeholder='Search for a Country' name='search' autoComplete='off' className='py-2 px-4 shadow w-full hover:bg-slate-400 hover:placeholder-white hover:text-white' value={text} onChange={(e) => setText(e.target.value)}/>
+        </form>
         <div className='grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3 my-10 lg:my-20'>
             {countries.map((country) => (
                 <Link to={`/country/${country.name.common}`}>
