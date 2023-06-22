@@ -19,10 +19,20 @@ export default function Home() {
   }, [])
   const searchForCountry = async() => {
     try {
-        
+        const res = await fetch(`https://restcountries.com/v3.1/name/${text}`)
+
+        if (!res.ok) throw new Error("Could not find Country")
+
+        const data = await res.json()
+        setCountries(data)
     } catch (error) {
-        
+        console.error(error)
     }
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    searchForCountry()
   }
     return (
     <>{!countries ? (<h1>Loading...</h1>) : (<>
@@ -31,8 +41,8 @@ export default function Home() {
             <h1 className='flex items-center justify-center text-slate-700 text-center px-5 text-3xl font-bold'>The Travel App</h1>
             <p>Powered by <a href='https://restcountries.com/' target='_blank' rel="noopener noreferrer" className='text-indigo-600 active:text-orange-400'>REST Countries</a></p>
         </div>
-        <form>
-            <input type='text' placeholder='Search for a Country' name='search' autoComplete='off' className='py-2 px-4 shadow w-full hover:bg-slate-400 hover:placeholder-white hover:text-white' value={text} onChange={(e) => setText(e.target.value)}/>
+        <form onSubmit={handleSubmit}>
+            <input type='text' placeholder='Search for a Country....' name='search' autoComplete='off' value={text} onChange={(e) => setText(e.target.value)}  className='py-2 px-4 shadow w-full hover:bg-slate-400 hover:placeholder-white hover:text-white' />
         </form>
         <div className='grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3 my-10 lg:my-20'>
             {countries.map((country) => (
